@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import Hero from './components/Hero';
 import About from './components/About';
+import Banner from './components/Banner';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -54,6 +55,7 @@ function App() {
         />
         <Navigation />
         <Hero />
+        <Banner />
         <Projects />
         <About />
         <Contact />
