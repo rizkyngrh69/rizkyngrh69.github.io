@@ -1,0 +1,11 @@
+node_modules/
+build/
+dist/
+.env
+.env.local
+.env.production
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
