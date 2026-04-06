@@ -85,7 +85,9 @@ const About: React.FC = () => {
           </Typography>
           <Box
             component="a"
-            href="mailto:rizkynugraha999@gmail.com?subject=CV Request"
+            href="https://docs.google.com/document/d/1vVsxLF549FLbQDgfrKv-XvGdnTvUHOa2h6yYtQvwrLI/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             sx={{
               display: { xs: 'none', md: 'flex' },
               alignItems: 'center',

@@ -75,7 +75,9 @@ const Contact: React.FC = () => {
             Drop me a line at{' '}
             <Typography
               component="a"
-              href="mailto:rizkynugraha999@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=rizkynugraha999@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               sx={{
                 color: 'white',
                 textDecoration: 'none',

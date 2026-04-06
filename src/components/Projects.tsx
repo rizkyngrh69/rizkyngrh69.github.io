@@ -79,6 +79,7 @@ const projects = [
 const Projects: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -97,13 +98,43 @@ const Projects: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    let animationFrameId: number;
+    let lastTime = performance.now();
+
+    const autoScroll = (currentTime: number) => {
+      if (sliderRef.current) {
+        // Frame rate independent speed (~30px per second)
+        const deltaTime = currentTime - lastTime;
+        if (deltaTime > 16) {
+          sliderRef.current.scrollLeft += 0.7; // scroll amount
+          
+          // Perfectly seamless infinite loop
+          // children[projects.length] is the exact start of the second duplicate list
+          const targetElement = sliderRef.current.children[projects.length] as HTMLElement;
+          if (targetElement && sliderRef.current.scrollLeft >= targetElement.offsetLeft) {
+            sliderRef.current.scrollLeft -= targetElement.offsetLeft;
+          }
+          lastTime = currentTime;
+        }
+      } else {
+        lastTime = currentTime; // Prevent jumping when resuming
+      }
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    animationFrameId = requestAnimationFrame(autoScroll);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
   return (
     <Box 
       component="section" 
-      id="projects" 
+      id="another-projects" 
       ref={sectionRef}
       sx={{ 
-        pt: { xs: 4, md: 8 },
+        pt: { xs: 4, md: 4 },
         pb: { xs: 12, md: 16 },
         bgcolor: 'transparent',
         position: 'relative',
@@ -123,19 +154,41 @@ const Projects: React.FC = () => {
             letterSpacing: '-0.02em',
           }}
         >
-          Projects
+          Another Projects
         </Typography>
         
-        <Grid container spacing={{ xs: 3, md: 4 }} sx={{ mb: { xs: 8, md: 10 } }}>
-          {projects.map((project, index) => (
-            <Grid item xs={12} md={6} key={index}>
+        <Box 
+          ref={sliderRef}
+          sx={{ 
+            display: 'flex', 
+            overflowX: 'auto', 
+            gap: { xs: 3, md: 4 }, 
+            pb: 4, 
+            mb: { xs: 6, md: 8 },
+            scrollSnapType: 'none',
+            scrollBehavior: 'auto', // ensure no smooth scrolling conflict during programmatic updates
+            msOverflowStyle: 'none', /* IE and Edge */
+            scrollbarWidth: 'none', /* Firefox */
+            '&::-webkit-scrollbar': { display: 'none' }
+          }}
+        >
+          {[...projects, ...projects].map((project, index) => (
+            <Box 
+              key={index}
+              sx={{ 
+                flex: { xs: '0 0 85%', sm: '0 0 60%', md: '0 0 45%', lg: '0 0 35%' }, 
+                scrollSnapAlign: 'start'
+              }}
+            >
               <Box
                 component="a"
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
-                  display: 'block',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
                   textDecoration: 'none',
                   color: 'inherit',
                   borderRadius: '16px',
@@ -174,11 +227,9 @@ const Projects: React.FC = () => {
                     backgroundPosition: 'center',
                     position: 'relative',
                   }}
-                >
+                />
 
-                </Box>
-
-                <Box sx={{ p: { xs: 2.5, md: 3 } }}>
+                <Box sx={{ p: { xs: 2.5, md: 3 }, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2, position: 'relative', zIndex: 1 }}>
                     <Typography 
                       variant="h3" 
@@ -197,6 +248,7 @@ const Projects: React.FC = () => {
                         borderRadius: '4px',
                         px: 1.5,
                         py: 0.5,
+                        ml: 1 // prevent squishing
                       }}
                     >
                       <Typography sx={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.8rem', fontWeight: 600 }}>
@@ -213,6 +265,7 @@ const Projects: React.FC = () => {
                       mb: 3,
                       position: 'relative',
                       zIndex: 1,
+                      flexGrow: 1 // Pushes tags to the bottom
                     }}
                   >
                     {project.description}
@@ -244,9 +297,9 @@ const Projects: React.FC = () => {
                   </Box>
                 </Box>
               </Box>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         <Box sx={{ textAlign: 'center' }}>
           <Box

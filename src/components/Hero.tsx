@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
             Rizky Nugraha
           </Typography>
         </Box>
-        
+
         <Typography
           variant="h1"
           sx={{
@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
         >
           Fullstack Dev, GIS Engineer.
         </Typography>
-        
+
         <Box sx={{ mb: { xs: 5, md: 6 }, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Box
@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
             </Typography>
           </Box>
         </Box>
-        
+
         <Typography
           sx={{
             fontSize: { xs: '1.05rem', md: '1.2rem' },
@@ -110,8 +110,8 @@ const Hero: React.FC = () => {
             letterSpacing: '0.005em',
           }}
         >
-          Developer with <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>1+ years</Box> of experience building web and desktop applications, 
-          focused on <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>fast MVP delivery</Box> using modern tech to ensure 
+          Developer with <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>1+ years</Box> of experience building web and desktop applications,
+          focused on <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>fast MVP delivery</Box> using modern tech to ensure
           scalable, efficient solutions.
         </Typography>
       </Container>
