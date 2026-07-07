@@ -110,7 +110,7 @@ const Hero: React.FC = () => {
             letterSpacing: '0.005em',
           }}
         >
-          Developer with <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>1+ years</Box> of experience building web and desktop applications,
+          Developer with <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>2+ years</Box> of experience building web and desktop applications,
           focused on <Box component="span" sx={{ color: 'white', fontWeight: 600 }}>fast MVP delivery</Box> using modern tech to ensure
           scalable, efficient solutions.
         </Typography>
